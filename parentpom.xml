@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+	<!--The identifier of the BOM-->
+	<parent>
+	   <groupId>mulebom.demo</groupId>
+       <artifactId>mulebom</artifactId>
+       <version>1.0.0</version>
+	   <relativePath>../mulebom/pom.xml</relativePath>
+	</parent>
+    <groupId>parentpom.demo</groupId>
+    <artifactId>parentpom</artifactId>
+    <version>1.0.0</version>
+	<packaging>pom</packaging>
+	<name>parent pom</name>
+    <url>http://maven.apache.org</url>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<app.runtime>4.4.0-20211227</app.runtime>
+	</properties>
+	<build>
+	 <pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.mule.tools.maven</groupId>
+				<artifactId>mule-maven-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<sharedLibraries>
+						<sharedLibrary>
+							<groupId>com.microsoft.sqlserver</groupId>
+							<artifactId>mssql-jdbc</artifactId>
+						</sharedLibrary>
+					</sharedLibraries>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.mulesoft.munit.tools</groupId>
+				<artifactId>munit-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>test</goal>
+							<goal>coverage-report</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<coverage>
+						<runCoverage>true</runCoverage>
+						<formats>
+							<format>html</format>
+						</formats>
+					</coverage>
+					<skipMunitTests>${munitSkipTests}</skipMunitTests>
+				</configuration>
+			</plugin>
+		</plugins>
+	 </pluginManagement>
+	</build>
+</project>
